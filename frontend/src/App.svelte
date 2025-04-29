@@ -7,7 +7,13 @@
   let error: string = "";
 
   onMount(async () => {
-    today = new Date().toLocaleDateString();
+    const options: Intl.DateTimeFormatOptions = {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    };
+    today = new Date().toLocaleDateString("en-US", options);
 
     try {
       const res = await fetch("/api/articles");
