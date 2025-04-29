@@ -1,64 +1,116 @@
 <script lang="ts">
-  import { onMount } from 'svelte';
-  import svelteLogo from './assets/svelte.svg';
-  import viteLogo from '/vite.svg';
-  import Counter from './lib/Counter.svelte';
+  import { onMount } from "svelte";
 
-  let apiKey: string = '';
+  let today: string = "";
+  let articles: any[] = [];
+  let loading: boolean = true;
+  let error: string = "";
 
   onMount(async () => {
+    today = new Date().toLocaleDateString();
+
     try {
-      const res = await fetch('/api/key');
+      const res = await fetch("/api/articles");
       const data = await res.json();
-      apiKey = data.apiKey;
+      articles = data.response.docs;
+      loading = false;
     } catch (error) {
-      console.error('Failed to fetch API key:', error);
+      console.error("Failed to fetch articles:", error);
+      error = "Failed to load articles.";
+      loading = false;
     }
   });
+  function getImage(article: any): string {
+    if (article?.multimedia && article.multimedia.default?.url) {
+      return article.multimedia.default.url;
+    }
+    return "";
+  }
 </script>
 
+<!-- html structure -->
 <main>
-  <div>
-    <a href="https://vite.dev" target="_blank" rel="noreferrer">
-      <img src={viteLogo} class="logo" alt="Vite Logo" />
-    </a>
-    <a href="https://svelte.dev" target="_blank" rel="noreferrer">
-      <img src={svelteLogo} class="logo svelte" alt="Svelte Logo" />
-    </a>
+  <div class="logo-container">
+    <div class="header">
+      <div class="date-container">
+        <p>
+          <span class="date">{today}</span><br />
+          <span class="place">Today's Paper</span>
+        </p>
+      </div>
+      <div class="logo">
+        <img src="/nyt_logo.png" alt="The New York Times Logo" />
+      </div>
+    </div>
   </div>
-  <h1>Vite + Svelte</h1>
+  <hr />
 
-  <div class="card">
-    <Counter />
-  </div>
+  {#if loading}
+    <p>Loading articles...</p>
+  {:else if error}
+    <p>{error}</p>
+  {:else}
+    <div class="grid-container">
+      <!-- ==================== Left Column ==================== -->
+      <div class="left-column">
+        {#if articles.length > 1}
+          {#if getImage(articles[1])}
+            <img src={getImage(articles[1])} alt={articles[1].headline.main} />
+          {/if}
+          <h2>{articles[1].headline.main}</h2>
+          <p>{articles[1].snippet}</p>
+          <br />
+          <hr />
+        {/if}
 
-  <p>
-    Your API Key: <strong>{apiKey}</strong>
-  </p>
+        {#if articles.length > 2}
+          <h2>{articles[2].headline.main}</h2>
+          <p>{articles[2].snippet}</p>
+          <br />
+          <hr />
+        {/if}
+      </div>
 
-  <p>
-    Check out <a href="https://github.com/sveltejs/kit#readme" target="_blank" rel="noreferrer">SvelteKit</a>, the official Svelte app framework powered by Vite!
-  </p>
+      <!-- ==================== Middle Column ==================== -->
+      <div class="middle-column">
+        {#if articles.length > 0}
+          <h1>{articles[0].headline.main}</h1>
+          <p>{articles[0].lead_paragraph}</p>
+          <br />
+          <hr />
+          <br />
+          {#if articles.length > 3}
+            {#if getImage(articles[3])}
+              <img
+                src={getImage(articles[3])}
+                alt={articles[3].headline.main}
+              />
+            {/if}
+            <h3>{articles[3].headline.main}</h3>
+            <p>{articles[3].snippet}</p>
+          {/if}
+        {/if}
+      </div>
 
-  <p class="read-the-docs">
-    Click on the Vite and Svelte logos to learn more
-  </p>
+      <!-- ==================== Right Column ==================== -->
+      <div class="right-column">
+        {#if articles.length > 4}
+          {#if getImage(articles[4])}
+            <img src={getImage(articles[4])} alt={articles[4].headline.main} />
+          {/if}
+          <h2>{articles[4].headline.main}</h2>
+          <p>{articles[4].snippet}</p>
+          <br />
+          <hr />
+        {/if}
+
+        {#if articles.length > 5}
+          <h2>{articles[5].headline.main}</h2>
+          <p>{articles[5].snippet}</p>
+        {/if}
+      </div>
+    </div>
+  {/if}
+
+  <hr style="height: 2px; background-color: black; margin: 2% 2% 3% 2%" />
 </main>
-
-<style>
-  .logo {
-    height: 6em;
-    padding: 1.5em;
-    will-change: filter;
-    transition: filter 300ms;
-  }
-  .logo:hover {
-    filter: drop-shadow(0 0 2em #646cffaa);
-  }
-  .logo.svelte:hover {
-    filter: drop-shadow(0 0 2em #ff3e00aa);
-  }
-  .read-the-docs {
-    color: #888;
-  }
-</style>
