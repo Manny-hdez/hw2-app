@@ -18,7 +18,7 @@ def get_articles():
     NYT_API_KEY = os.getenv("NYT_API_KEY")
     url = "https://api.nytimes.com/svc/search/v2/articlesearch.json"
     params = {
-        "q": "(Sacramento) OR (UC Davis) OR (Davis, CA)",
+        "q": "UC Davis (Calif) OR Sacramento (Calif)",
         "api-key": NYT_API_KEY
     }
     response = requests.get(url, params=params)
