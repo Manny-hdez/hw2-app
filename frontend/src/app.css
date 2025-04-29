@@ -53,6 +53,15 @@ p {
   margin: 0;
 }
 
+.article-link {
+  text-decoration: none;
+  color: black;
+}
+
+.article-link:hover {
+  color: gray;
+}
+
 /* Header container */
 .header {
   position: relative;
