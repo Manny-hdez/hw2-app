@@ -1,6 +1,10 @@
 from flask import Flask, jsonify, send_from_directory
 import os
+import requests
 from flask_cors import CORS
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__, static_folder="static", template_folder="templates")
 CORS(app)
@@ -8,6 +12,18 @@ CORS(app)
 @app.route("/api/key")
 def get_key():
     return jsonify({"apiKey": os.getenv("NYT_API_KEY")})
+
+@app.route("/api/articles")
+def get_articles():
+    NYT_API_KEY = os.getenv("NYT_API_KEY")
+    url = "https://api.nytimes.com/svc/search/v2/articlesearch.json"
+    params = {
+        "q": "(Sacramento) OR (UC Davis) OR (Davis, CA)",
+        "api-key": NYT_API_KEY
+    }
+    response = requests.get(url, params=params)
+    articles = response.json()
+    return jsonify(articles)
 
 @app.route("/")
 @app.route("/<path:path>")
