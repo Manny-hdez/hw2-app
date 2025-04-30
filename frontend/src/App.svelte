@@ -60,18 +60,35 @@
       <!-- ==================== Left Column ==================== -->
       <div class="left-column">
         {#if articles.length > 1}
-          {#if getImage(articles[1])}
-            <img src={getImage(articles[1])} alt={articles[1].headline.main} />
-          {/if}
-          <h2>{articles[1].headline.main}</h2>
-          <p>{articles[1].snippet}</p>
+          <a
+            href={articles[1].web_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-link"
+          >
+            {#if getImage(articles[1])}
+              <img
+                src={getImage(articles[1])}
+                alt={articles[1].headline.main}
+              />
+            {/if}
+            <h2>{articles[1].headline.main}</h2>
+            <p>{articles[1].snippet}</p>
+          </a>
           <br />
           <hr />
         {/if}
 
         {#if articles.length > 2}
-          <h2>{articles[2].headline.main}</h2>
-          <p>{articles[2].snippet}</p>
+          <a
+            href={articles[2].web_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-link"
+          >
+            <h2>{articles[2].headline.main}</h2>
+            <p>{articles[2].snippet}</p>
+          </a>
           <br />
           <hr />
         {/if}
@@ -80,20 +97,34 @@
       <!-- ==================== Middle Column ==================== -->
       <div class="middle-column">
         {#if articles.length > 0}
-          <h1>{articles[0].headline.main}</h1>
-          <p>{articles[0].lead_paragraph}</p>
+          <a
+            href={articles[0].web_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-link"
+          >
+            <h1>{articles[0].headline.main}</h1>
+            <p>{articles[0].lead_paragraph}</p>
+          </a>
           <br />
           <hr />
           <br />
           {#if articles.length > 3}
-            {#if getImage(articles[3])}
-              <img
-                src={getImage(articles[3])}
-                alt={articles[3].headline.main}
-              />
-            {/if}
-            <h3>{articles[3].headline.main}</h3>
-            <p>{articles[3].snippet}</p>
+            <a
+              href={articles[3].web_url}
+              target="_blank"
+              rel="noopener noreferrer"
+              class="article-link"
+            >
+              {#if getImage(articles[3])}
+                <img
+                  src={getImage(articles[3])}
+                  alt={articles[3].headline.main}
+                />
+              {/if}
+              <h3>{articles[3].headline.main}</h3>
+              <p>{articles[3].snippet}</p>
+            </a>
           {/if}
         {/if}
       </div>
@@ -101,18 +132,35 @@
       <!-- ==================== Right Column ==================== -->
       <div class="right-column">
         {#if articles.length > 4}
-          {#if getImage(articles[4])}
-            <img src={getImage(articles[4])} alt={articles[4].headline.main} />
-          {/if}
-          <h2>{articles[4].headline.main}</h2>
-          <p>{articles[4].snippet}</p>
+          <a
+            href={articles[4].web_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-link"
+          >
+            {#if getImage(articles[4])}
+              <img
+                src={getImage(articles[4])}
+                alt={articles[4].headline.main}
+              />
+            {/if}
+            <h2>{articles[4].headline.main}</h2>
+            <p>{articles[4].snippet}</p>
+          </a>
           <br />
           <hr />
         {/if}
 
         {#if articles.length > 5}
-          <h2>{articles[5].headline.main}</h2>
-          <p>{articles[5].snippet}</p>
+          <a
+            href={articles[5].web_url}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="article-link"
+          >
+            <h2>{articles[5].headline.main}</h2>
+            <p>{articles[5].snippet}</p>
+          </a>
         {/if}
       </div>
     </div>
