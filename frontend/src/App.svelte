@@ -104,7 +104,7 @@
             class="article-link"
           >
             <h1>{articles[0].headline.main}</h1>
-            <p>{articles[0].lead_paragraph}</p>
+            <p>{articles[0].snippet}</p>
           </a>
           <br />
           <hr />
@@ -122,7 +122,7 @@
                   alt={articles[3].headline.main}
                 />
               {/if}
-              <h3>{articles[3].headline.main}</h3>
+              <h2>{articles[3].headline.main}</h2>
               <p>{articles[3].snippet}</p>
             </a>
           {/if}
