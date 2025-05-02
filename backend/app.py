@@ -23,6 +23,7 @@ def get_articles():
     }
     response = requests.get(url, params=params)
     articles = response.json()
+    print(articles)
     return jsonify(articles)
 
 @app.route("/")
