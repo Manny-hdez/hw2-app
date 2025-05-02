@@ -17,6 +17,7 @@
 
     try {
       const res = await fetch("/api/articles");
+      console.log(res);
       const data = await res.json();
       articles = data.response.docs;
       loading = false;

@@ -7,3 +7,12 @@ services:
       - "8000:8000"
     env_file:
       - .env
+# Frontend
+# articles in columns
+# nytimes logo
+# responsivness/media queries
+# header component
+# - datetime
+
+# backend
+# test api call and articles loading
