@@ -2,6 +2,8 @@ ECS162 HW2
 
 # HW2 App
 
+https://github.com/Manny-hdez/hw2-app
+
 ## Running the Application
 
 1. Ensure Docker Desktop is running.
